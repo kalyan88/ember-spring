@@ -3,9 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:util="http://www.springframework.org/schema/util"
+
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -29,7 +32,20 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+  
+	<beans:bean id="documentationController" class="org.jsondoc.springmvc.controller.JSONDocController">
+	<beans:constructor-arg name="version" value="1.0" />
+	<beans:constructor-arg name="basePath" value="/api" />
+	<beans:constructor-arg name="packages">
+	  <util:list>
+		<beans:value>au.com.emberspring.controllers</beans:value> <!-- packages in which you have your spring controllers -->
+		<beans:value>au.com.emberspring.domain</beans:value> <!-- packages in which you have your objects -->
+	  </util:list>
+	</beans:constructor-arg>
+	<beans:property name="playgroundEnabled" value="true" /> <!-- optional -->
+	<beans:property name="displayMethodAs" value="URI" /> <!-- optional -->
+</beans:bean>
+		
 	<context:component-scan base-package="au.com.emberspring" />
 	
 	
