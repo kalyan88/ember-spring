@@ -1,9 +1,10 @@
 package au.com.emberspring.controllers;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
+import org.jsondoc.core.annotation.Api;
+import org.jsondoc.core.annotation.ApiMethod;
+import org.jsondoc.core.annotation.ApiResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,17 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import au.com.emberspring.domain.Blog;
-import au.com.emberspring.domain.Category;
 import au.com.emberspring.domain.Post;
-import au.com.emberspring.ember.EmberModel;
 import au.com.emberspring.ember.EmberModel;
 import au.com.emberspring.service.BlogService;
 
+@Api(description="Base blogs controller", name="blogs")
 @RestController
 @RequestMapping("blogs")
 public class BlogController {
@@ -33,6 +32,8 @@ public class BlogController {
 		this.blogService = blogService;
 	}
 	
+	@ApiMethod(summary="saves the blog changes made by Kalyan", description="updated the method with the API comments")
+	@ApiResponseObject
     @RequestMapping(
     		value = "{id}",
             method = RequestMethod.PUT,
